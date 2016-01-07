@@ -28,4 +28,4 @@
 *.app
 
 # eclipse binary folder
-/bin/
+/Debug/
