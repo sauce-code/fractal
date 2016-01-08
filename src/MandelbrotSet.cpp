@@ -1,6 +1,6 @@
 #include "MandelbrotSet.h"
 
-MandelbrotSet::MandelbrotSet(double width, double height) {
+MandelbrotSet::MandelbrotSet(unsigned int width, unsigned int height) {
 	this->width = width;
 	this->height = height;
 	min.r = -2.0;
@@ -42,4 +42,12 @@ void MandelbrotSet::draw(unsigned int x, unsigned int y, complex c) {
 		glVertex2i(x, y);
 		glEnd();
 	}
+}
+
+void MandelbrotSet::setWidth(unsigned int width) {
+	this->width = width;
+}
+
+void MandelbrotSet::setHeight(unsigned int Height) {
+	this->height = height;
 }

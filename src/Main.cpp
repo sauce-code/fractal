@@ -8,6 +8,11 @@
 
 MandelbrotSet* ms = new MandelbrotSet(WIDTH, HEIGHT);
 
+void reshape(int width, int height) {
+	ms->setWidth(width);
+	ms->setHeight(height);
+}
+
 void display() {
 	glClear(GL_COLOR_BUFFER_BIT);
 	glBegin(GL_POINTS);
@@ -29,6 +34,7 @@ int main(int argc, char** argv) {
 	gluOrtho2D(0.0, WIDTH, 0.0, HEIGHT);
 	glClearColor(0.0, 1.0, 1.0, 1.0);
 
+	glutReshapeFunc(reshape);
 	glutDisplayFunc(display);
 //	glutKeyboardFunc(keyboard);
 //	glutMouseFunc(mouse);
