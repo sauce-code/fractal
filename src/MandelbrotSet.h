@@ -5,12 +5,11 @@
 
 #include "Complex.h"
 
-#define MAX_ITERATIONS 50
-
 class MandelbrotSet {
 private:
 	unsigned int width;
 	unsigned int height;
+	unsigned int iterations;
 	complex min;
 	complex max;
 	complex factor;
@@ -21,6 +20,7 @@ public:
 	void calculate();
 	void setWidth(unsigned int);
 	void setHeight(unsigned int);
+	void setIterations(unsigned int);
 };
 
 #endif /* MANDELBROTSET_H_ */

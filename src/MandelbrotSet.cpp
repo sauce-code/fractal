@@ -3,6 +3,7 @@
 MandelbrotSet::MandelbrotSet(unsigned int width, unsigned int height) {
 	this->width = width;
 	this->height = height;
+	this->iterations = 50;
 	min.r = -2.0;
 	min.i = -1.2;
 	max.r = 1.0;
@@ -29,7 +30,7 @@ void MandelbrotSet::calculate() {
 void MandelbrotSet::draw(unsigned int x, unsigned int y, complex c) {
 	complex z = c;
 	bool isInside = true;
-	for (unsigned int n = 0; n < MAX_ITERATIONS; n++) {
+	for (unsigned int n = 0; n < iterations; n++) {
 		if (z.getAbsolute() > 4) {
 			isInside = false;
 			break;
@@ -50,4 +51,8 @@ void MandelbrotSet::setWidth(unsigned int width) {
 
 void MandelbrotSet::setHeight(unsigned int Height) {
 	this->height = height;
+}
+
+void MandelbrotSet::setIterations(unsigned int iterations) {
+	this->iterations = iterations;
 }
