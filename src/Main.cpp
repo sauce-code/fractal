@@ -2,7 +2,11 @@
 
 #include "MandelbrotSet.h"
 
-MandelbrotSet* ms = new MandelbrotSet(800, 600);
+#define WIDTH 800
+
+#define HEIGHT 600
+
+MandelbrotSet* ms = new MandelbrotSet(WIDTH, HEIGHT);
 
 void display() {
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -20,9 +24,9 @@ int main(int argc, char** argv) {
 //	GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 	glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
 
-	glutInitWindowSize(800, 600);
+	glutInitWindowSize(WIDTH, HEIGHT);
 	glutCreateWindow("Mandelbrot Set");
-	gluOrtho2D(0.0, 800, 0.0, 600);
+	gluOrtho2D(0.0, WIDTH, 0.0, HEIGHT);
 	glClearColor(0.0, 1.0, 1.0, 1.0);
 
 	glutDisplayFunc(display);
