@@ -2,15 +2,83 @@
 
 #include "MandelbrotSet.h"
 #include "JuliaSet.h"
-#include "Menus.h"
+
 
 #define WIDTH 800
-
 #define HEIGHT 600
+
+#define ZOOM_IN 0
+#define ZOOM_OUT 1
+#define RESET 2
+#define SHOW_JULIA 3
+#define SAVE_IMAGE 4
 
 MandelbrotSet* ms = new MandelbrotSet(WIDTH, HEIGHT);
 JuliaSet* js = new JuliaSet(WIDTH / 2, HEIGHT);
 GLint WindowID1, WindowID2;
+int mouseX, mouseY;
+
+
+void processMenuEvents(int option) {
+	float xMapped = 0;
+	float yMapped = 0;
+
+	switch (option) {
+	case ZOOM_IN:
+		printf("Zoom to %i|%i", mouseX, mouseY);
+		ms->zoom(mouseX, mouseY);
+		ms->calculate();
+		glutPostRedisplay();
+		break;
+	case ZOOM_OUT: // TODO
+		printf("Zoom out");
+		break;
+	case RESET: // TODO
+		break;
+	case SHOW_JULIA:
+		glutSetWindow(WindowID2);
+		xMapped = js->min.r + ((js->max.r - js->min.r) / WIDTH) * mouseX;
+		yMapped = js->min.i + ((js->max.i - js->min.i) / HEIGHT) * mouseY;
+		js->k.r = xMapped;
+		js->k.i = yMapped;
+		js->calculate();
+		printf("This is the Julia Set for c  %f", xMapped);
+		printf(" + %f", yMapped);
+		printf("i");
+		glutPostRedisplay();
+		glutSetWindow(WindowID1);
+		break;
+	case SAVE_IMAGE: // TODO
+		printf("Image Saved as");
+		break;
+	}
+}
+
+void createColorMenu(int option) {
+
+}
+
+void createMenu() {
+
+	int menu, colorSubmenu;
+
+	colorSubmenu = glutCreateMenu(createColorMenu);
+	glutAddMenuEntry("Red", 1);
+	glutAddMenuEntry("", 2);
+	glutAddMenuEntry("", 3);
+
+	menu = glutCreateMenu(processMenuEvents);
+	//add entries to our menu
+	glutAddMenuEntry("Zoom in", ZOOM_IN);
+	glutAddMenuEntry("Zoom out", ZOOM_OUT);
+	glutAddMenuEntry("Reset", RESET);
+	glutAddMenuEntry("Show Julia", SHOW_JULIA);
+	glutAddSubMenu("Change Colors", colorSubmenu);
+	glutAddMenuEntry("Save Image", SAVE_IMAGE);
+
+	glutAttachMenu (GLUT_RIGHT_BUTTON);
+
+}
 
 void reshapeMandelbrot(int width, int height) {
 	glutReshapeWindow(WIDTH - 10, HEIGHT);
@@ -62,6 +130,11 @@ void mouseMandelbrot(int button, int state, int x, int y) {
 	}
 }
 
+void mousePassiveMandelbrot(int x, int y) {
+	mouseX = x;
+	mouseY = y;
+}
+
 void mouseJulia(int button, int state, int x, int y) {
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
 		js->zoom(x, y);
@@ -84,6 +157,7 @@ int main(int argc, char** argv) {
 	glutReshapeFunc(reshapeMandelbrot);
 	glutDisplayFunc(displayMandelbrot);
 	glutMouseFunc(mouseMandelbrot);
+	glutPassiveMotionFunc(mousePassiveMandelbrot);
 
 	createMenu();
 
