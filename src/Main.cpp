@@ -84,7 +84,7 @@ int main(int argc, char** argv) {
 	glutReshapeFunc(reshapeMandelbrot);
 	glutDisplayFunc(displayMandelbrot);
 	glutMouseFunc(mouseMandelbrot);
-	glutAttachMenu(GLUT_RIGHT_BUTTON);
+
 	createMenu();
 
 	// second Window for Julia Sets
