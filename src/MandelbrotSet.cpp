@@ -97,7 +97,7 @@ void MandelbrotSet::zoom(unsigned int x, unsigned int y) {
 
 	// map x & y to function
 	float xMapped = min.r + ((max.r - min.r) / width) * x;
-	float yMapped = min.i + ((max.i - min.i) / height) * (height - y);
+	float yMapped = min.i + ((max.i - min.i) / height) * y;
 
 	printf("xMapped: %f yMapped: %f \n", xMapped, yMapped);
 
