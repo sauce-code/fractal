@@ -116,7 +116,7 @@ void MandelbrotSet::zoom(unsigned int x, unsigned int y) {
 	max.r = xMapped + (newWidth / 2);
 	min.i = yMapped - (newHeight / 2);
 //	max.i = yMapped + (newHeight / 2);
-	max.i = min.i + (max.r - min.r) * height / width;
+	max.i = min.i + (max.r - min.r) * newHeight / newWidth;
 
 	printf("min.r %f max.r %f \n", min.r, max.r);
 	printf("min.i %f max.i %f \n", min.i, max.i);
