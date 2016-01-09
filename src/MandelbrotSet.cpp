@@ -3,8 +3,8 @@
 MandelbrotSet::MandelbrotSet(unsigned int width, unsigned int height) {
 	this->width = width;
 	this->height = height;
-	this->iterations = 100;
-	this->colorMode = 1;
+	this->iterations = 64;
+	this->colorMode = 2;
 	min.r = -2.0;
 	min.i = -1.2;
 	max.r = 1.0;
@@ -80,10 +80,29 @@ float* MandelbrotSet::getColor(unsigned int n) {
 		}
 		break;
 	case 2:
-		if (n < iterations - 1) {
-			red = (n % 3) / 3.0f;
-			green = ((n + 1) % 3) / 3.0f;
-			blue = ((n + 2) % 3) / 3.0f;
+		if (n == iterations) {
+
+		} else if (n < 64) {
+			red = n * 2.0f / 256.0f;
+		} else if (n < 128) {
+			red = ((((n - 64.0f) * 128.0f) / 126.0f) + 128.0f) / 256.0f;
+		} else if (n < 265) {
+			red = ((((n - 128.0f) * 62.0f) / 127.0f) + 193.0f) / 256.0f;
+		} else if (n < 512) {
+			red = 1.0f;
+			green = ((((n - 256.0f) * 62.0f) / 255.0f) + 1.0f) / 256.0f;
+		} else if (n < 1024) {
+			red = 1.0f;
+			green = ((((n - 512.0f) * 63.0f) / 511.0f) + 64.0f) / 256.0f;
+		} else if (n < 2048) {
+			red = 1.0f;
+			green = ((((n - 1024.0f) * 63.0f) / 1023.0f) + 128.0f) / 256.0f;
+		} else if (n < 4096) {
+			red = 1.0f;
+			green = ((((n - 2048.0f) * 63.0f) / 2047.0f) + 192.0f) / 256.0f;
+		} else {
+			red = 1.0f;
+			green = 1.0f;
 		}
 		break;
 	default:
@@ -130,5 +149,5 @@ void MandelbrotSet::zoom(unsigned int x, unsigned int y) {
 	factor.r = (max.r - min.r) / (width - 1);
 	factor.i = (max.i - min.i) / (height - 1);
 
-	iterations += 10;
+	iterations *= 2;
 }
