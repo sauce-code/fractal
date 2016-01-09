@@ -13,7 +13,7 @@ GLint WindowID1, WindowID2;
 
 
 void reshape(int width, int height) {
-	glutReshapeWindow(WIDTH, HEIGHT);
+	glutReshapeWindow(WIDTH - 10, HEIGHT);
 //	ms->setWidth(width);
 //	ms->setHeight(height);
 }
