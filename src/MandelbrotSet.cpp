@@ -158,6 +158,19 @@ void MandelbrotSet::setIterations(unsigned int iterations) {
 	this->iterations = iterations;
 }
 
+void MandelbrotSet::reset() {
+	this->width = width;
+	this->height = height;
+	this->iterations = 128;
+	this->colorMode = 2;
+	min.r = -2.0;
+	min.i = -1.2;
+	max.r = 1.0;
+	max.i = min.i + (max.r - min.r) * height / width;
+	factor.r = (max.r - min.r) / (width - 1);
+	factor.i = (max.i - min.i) / (height - 1);
+}
+
 void MandelbrotSet::zoom(unsigned int x, unsigned int y) {
 	// map x & y to function
 	float xMapped = min.r + ((max.r - min.r) / width) * x;

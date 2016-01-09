@@ -16,6 +16,7 @@ public:
 //	virtual ~JuliaSet();
 	void draw(unsigned int, unsigned int, complex);
 	void calculate();
+	void reset();
 	complex k;
 };
 

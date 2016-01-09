@@ -25,6 +25,7 @@ public:
 	void setWidth(unsigned int);
 	void setHeight(unsigned int);
 	void setIterations(unsigned int);
+	void reset();
 	void zoom(unsigned int, unsigned int);
 	void setColorMode(int);
 };

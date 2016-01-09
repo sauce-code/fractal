@@ -52,3 +52,14 @@ void JuliaSet::draw(unsigned int x, unsigned int y, complex c) {
 	glVertex2i(x, y);
 	glEnd();
 }
+
+void JuliaSet::reset() {
+	k.r = 0.353;
+	k.i = 0.288;
+	min.r = -1.4;
+	min.i = -2.5;
+	max.r = 1.5;
+	max.i = min.i + (max.r - min.r) * height / width;
+	factor.r = (max.r - min.r) / (width - 1);
+	factor.i = (max.i - min.i) / (height - 1);
+}
