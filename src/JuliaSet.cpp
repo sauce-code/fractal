@@ -7,8 +7,10 @@
 
 #include "JuliaSet.h"
 
-JuliaSet::JuliaSet(unsigned int width, unsigned int height): MandelbrotSet(width, height) {
-
+JuliaSet::JuliaSet(unsigned int width, unsigned int height) :
+		MandelbrotSet(width, height) {
+	k.r = 0.353;
+	k.i = 0.288;
 }
 
 //JuliaSet::~JuliaSet() {
@@ -28,9 +30,6 @@ void JuliaSet::calculate() {
 
 void JuliaSet::draw(unsigned int x, unsigned int y, complex c) {
 	complex z = c;
-	complex k;
-	k.r = 0.353;
-	k.i = 0.288;
 	unsigned int n = 0;
 
 	for (n = 0; n < iterations; n++) {
