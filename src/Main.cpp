@@ -11,14 +11,19 @@ MandelbrotSet* ms = new MandelbrotSet(WIDTH, HEIGHT);
 JuliaSet* js = new JuliaSet(WIDTH / 2, HEIGHT);
 GLint WindowID1, WindowID2;
 
-
-void reshape(int width, int height) {
+void reshapeMandelbrot(int width, int height) {
 	glutReshapeWindow(WIDTH - 10, HEIGHT);
 //	ms->setWidth(width);
 //	ms->setHeight(height);
 }
 
-void display() {
+void reshapeJulia(int width, int height) {
+	glutReshapeWindow((WIDTH / 2) - 10, HEIGHT);
+//	js->setWidth(width);
+//	js->setHeight(height);
+}
+
+void displayMandelbrot() {
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	ms->calculate();
@@ -34,7 +39,7 @@ void displayJulia() {
 	glFlush();
 }
 
-void mouse(int button, int state, int x, int y) {
+void mouseMandelbrot(int button, int state, int x, int y) {
 
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
 		ms->zoom(x, y);
@@ -75,15 +80,16 @@ int main(int argc, char** argv) {
 	WindowID1 = glutCreateWindow("Mandelbrot Set");
 	gluOrtho2D(0.0, WIDTH, 0.0, HEIGHT);
 	glClearColor(0.0, 0.0, 0.0, 1.0);
-	glutReshapeFunc(reshape);
-	glutDisplayFunc(display);
-	glutMouseFunc(mouse);
+	glutReshapeFunc(reshapeMandelbrot);
+	glutDisplayFunc(displayMandelbrot);
+	glutMouseFunc(mouseMandelbrot);
 
 	// second Window for Julia Sets
 	glutInitWindowSize((WIDTH / 2) - 10, HEIGHT);
 	glutInitWindowPosition(900, 20);
 	WindowID2 = glutCreateWindow("Julia Set");
 	gluOrtho2D(0.0, (WIDTH / 2), 0.0, HEIGHT);
+	glutReshapeFunc(reshapeJulia);
 	glutDisplayFunc(displayJulia);
 	glutMouseFunc(mouseJulia);
 
