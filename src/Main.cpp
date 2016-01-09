@@ -3,7 +3,6 @@
 #include "MandelbrotSet.h"
 #include "JuliaSet.h"
 
-
 #define WIDTH 800
 #define HEIGHT 600
 
@@ -17,7 +16,6 @@ MandelbrotSet* ms = new MandelbrotSet(WIDTH, HEIGHT);
 JuliaSet* js = new JuliaSet(WIDTH / 2, HEIGHT);
 GLint WindowID1, WindowID2;
 int mouseX, mouseY;
-
 
 void processMenuEvents(int option) {
 	float xMapped = 0;
@@ -54,7 +52,22 @@ void processMenuEvents(int option) {
 	}
 }
 
-void createColorMenu(int option) {
+void processColorMenu(int option) {
+
+	switch (option) {
+	case 0:
+		ms->colorMode = 0;
+		break;
+	case 1:
+		ms->colorMode = 1;
+		break;
+	case 2:
+		ms->colorMode = 2;
+		break;
+	}
+
+	ms->calculate();
+	glutPostRedisplay();
 
 }
 
@@ -62,10 +75,10 @@ void createMenu() {
 
 	int menu, colorSubmenu;
 
-	colorSubmenu = glutCreateMenu(createColorMenu);
-	glutAddMenuEntry("Red", 1);
-	glutAddMenuEntry("", 2);
-	glutAddMenuEntry("", 3);
+	colorSubmenu = glutCreateMenu(processColorMenu);
+	glutAddMenuEntry("Red & White", 0);
+	glutAddMenuEntry("RGB", 1);
+	glutAddMenuEntry("flowers", 2);
 
 	menu = glutCreateMenu(processMenuEvents);
 	//add entries to our menu
@@ -76,7 +89,7 @@ void createMenu() {
 	glutAddSubMenu("Change Colors", colorSubmenu);
 	glutAddMenuEntry("Save Image", SAVE_IMAGE);
 
-	glutAttachMenu (GLUT_RIGHT_BUTTON);
+	glutAttachMenu(GLUT_RIGHT_BUTTON);
 
 }
 
