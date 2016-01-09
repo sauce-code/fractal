@@ -36,13 +36,32 @@ void MandelbrotSet::draw(unsigned int x, unsigned int y, complex c) {
 			break;
 		}
 		z = z.pow2() + c;
+
+//		if (n == iterations - 1) {
+			glBegin(GL_POINTS);
+			glColor3f(0.0, 0.0, getColor(n));
+			glVertex2i(x, y);
+			glEnd();
+//		}
+
 	}
-	if (isInside) {
-		glBegin(GL_POINTS);
-		glColor3f(1.0, 0.0, 0.0);
-		glVertex2i(x, y);
-		glEnd();
-	}
+//	if (isInside) {
+//		glBegin(GL_POINTS);
+//		glColor3f(1.0, 0.0, 0.0);
+//		glVertex2i(x, y);
+//		glEnd();
+//	}
+}
+
+float MandelbrotSet::getColor(unsigned int n) {
+	// n liegt zwischen 0 und interations - 1
+	// n auf 1 - 100 mappen um dann einen color Value zu bestimmen
+
+	float step = 1.0 / iterations;
+	float redValue = n * step;
+
+	return redValue;
+
 }
 
 void MandelbrotSet::setWidth(unsigned int width) {

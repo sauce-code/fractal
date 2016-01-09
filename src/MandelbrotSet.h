@@ -14,6 +14,7 @@ private:
 	complex max;
 	complex factor;
 	void draw(unsigned int, unsigned int, complex);
+	float getColor(unsigned int);
 public:
 	MandelbrotSet(unsigned int, unsigned int);
 	virtual ~MandelbrotSet();
