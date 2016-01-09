@@ -3,8 +3,8 @@
 MandelbrotSet::MandelbrotSet(unsigned int width, unsigned int height) {
 	this->width = width;
 	this->height = height;
-	this->iterations = 50;
-	this->colorMode = 0;
+	this->iterations = 100;
+	this->colorMode = 2;
 	min.r = -2.0;
 	min.i = -1.2;
 	max.r = 1.0;
@@ -48,34 +48,56 @@ void MandelbrotSet::draw(unsigned int x, unsigned int y, complex c) {
 }
 
 float* MandelbrotSet::getColor(unsigned int n) {
-	float* array = new float[3];
-	float step = 1.0 / iterations;
-	float redValue = 0.0;
+	float step = 1.0f / iterations;
+	float red = 0.0;
+	float green = 0.0;
+	float blue = 0.0;
 
 	switch (colorMode) {
 	case 0: // all red
-		redValue = 2 * n * step;
+		red = 2 * n * step;
 		if (n < iterations / 2 - 1) {
-			array[1] = 0.0;
-			array[2] = 0.0;
-		} else if (n < iterations - 2){
-			array[1] = 1.0;
-			array[2] = 1.0;
+			green = 0.0;
+			blue = 0.0;
+		} else if (n < iterations - 2) {
+			green = 1.0;
+			blue = 1.0;
 		} else {
-			redValue = 0.0;
-			array[1] = 0.0;
-			array[2] = 0.0;
+			red = 0.0;
+			green = 0.0;
+			blue = 0.0;
 		}
-		array[0] = redValue;
+		break;
+	case 1:
+		if (n < iterations / 3) {
+			red = 3.0f * n * step;
+		} else if (n < iterations / 3 * 2) {
+//			red = 1.0f - 3.0f / 2.0f * n * step;
+			green = 3.0f / 2.0f * n * step;
+		} else if (n < iterations - 1) {
+//			green = 1.0f - n * step;
+			blue = n * step;
+		}
+		break;
+	case 2:
+		if (n < iterations - 1) {
+			red = (n % 3) / 3.0f;
+			green = ((n + 1) % 3) / 3.0f;
+			blue = ((n + 2) % 3) / 3.0f;
+		}
 		break;
 	default:
-		array[0] = 1.0;
-		array[1] = 0.0;
-		array[2] = 0.0;
+		red = 1.0;
+		green = 0.0;
+		blue = 0.0;
+		break;
 	}
 
-	return array;
-
+	float* ret = new float[3];
+	ret[0] = red;
+	ret[1] = green;
+	ret[2] = blue;
+	return ret;
 }
 
 void MandelbrotSet::setWidth(unsigned int width) {
