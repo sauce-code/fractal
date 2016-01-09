@@ -21,6 +21,20 @@ void display() {
 	glFlush();
 }
 
+void displayJulia() {
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	glColor3f(1.0, 0.0, 0.0);
+	glBegin(GL_POLYGON);
+	glVertex2i(40, 40);
+	glVertex2i(240, 40);
+	glVertex2i(240, 240);
+	glVertex2i(40, 240);
+	glEnd();
+
+	glFlush();
+}
+
 void mouse(int button, int state, int x, int y){
 
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
@@ -32,19 +46,28 @@ void mouse(int button, int state, int x, int y){
 }
 
 int main(int argc, char** argv) {
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
+	GLint WindowID1, WindowID2;
 
-	glutInitWindowSize(WIDTH - 10, HEIGHT);
-	glutCreateWindow("Mandelbrot Set");
+	glutInit(&argc, argv);
+//	glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
+
+	// first window for Mandebrot Sets
+	glutInitWindowSize(WIDTH- 10, HEIGHT);
+	glutInitWindowPosition(50, 20);
+	WindowID1 = glutCreateWindow("Mandelbrot Set");
 	gluOrtho2D(0.0, WIDTH, 0.0, HEIGHT);
 	glClearColor(0.0, 0.0, 0.0, 1.0);
-
 //	glutReshapeFunc(reshape);
 	glutDisplayFunc(display);
 	glutMouseFunc(mouse);
-//	glutKeyboardFunc(keyboard);
-//	glutMouseFunc(mouse);
+
+	// second Window for Julia Sets
+	glutInitWindowSize(WIDTH /2, HEIGHT);
+	glutInitWindowPosition(900, 20);
+	WindowID2 = glutCreateWindow("Julia Set");
+	gluOrtho2D(0.0, WIDTH, 0.0, HEIGHT);
+	glutDisplayFunc(displayJulia);
+
 
 	glutMainLoop();
 
