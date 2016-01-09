@@ -33,8 +33,6 @@ void mouse(int button, int state, int x, int y){
 
 int main(int argc, char** argv) {
 	glutInit(&argc, argv);
-//	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE,
-//	GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 	glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
 
 	glutInitWindowSize(WIDTH - 10, HEIGHT);
