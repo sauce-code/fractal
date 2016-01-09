@@ -40,11 +40,15 @@ void mouse(int button, int state, int x, int y) {
 		ms->calculate();
 		glutPostRedisplay();
 	} else if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN) {
+
 		float xMapped = js->min.r + ((js->max.r - js->min.r) / WIDTH) * x;
 		float yMapped = js->min.i + ((js->max.i - js->min.i) / HEIGHT) * y;
 		js->k.r = xMapped;
 		js->k.i = yMapped;
 		js->calculate();
+		printf("This is the Julia Set for c  %f", xMapped);
+		printf(" + %f", yMapped);
+		printf("i");
 		glutSetWindow(WindowID2);
 		glutPostRedisplay();
 		glutSetWindow(WindowID1);
