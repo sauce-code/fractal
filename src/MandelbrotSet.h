@@ -6,7 +6,7 @@
 #include "Complex.h"
 
 class MandelbrotSet {
-private:
+public:
 	unsigned int width;
 	unsigned int height;
 	unsigned int iterations;

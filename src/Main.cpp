@@ -1,12 +1,14 @@
 #include <GL/freeglut.h>
 
 #include "MandelbrotSet.h"
+#include "JuliaSet.h"
 
 #define WIDTH 800
 
 #define HEIGHT 600
 
 MandelbrotSet* ms = new MandelbrotSet(WIDTH, HEIGHT);
+JuliaSet* js = new JuliaSet(WIDTH, HEIGHT);
 
 void reshape(int width, int height) {
 	ms->setWidth(width);
@@ -24,13 +26,7 @@ void display() {
 void displayJulia() {
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	glColor3f(1.0, 0.0, 0.0);
-	glBegin(GL_POLYGON);
-	glVertex2i(40, 40);
-	glVertex2i(240, 40);
-	glVertex2i(240, 240);
-	glVertex2i(40, 240);
-	glEnd();
+	js->calculate();
 
 	glFlush();
 }
@@ -42,7 +38,6 @@ void mouse(int button, int state, int x, int y){
 		ms->calculate();
 		glutPostRedisplay();
 	}
-
 }
 
 int main(int argc, char** argv) {
@@ -65,7 +60,7 @@ int main(int argc, char** argv) {
 	glutInitWindowSize(WIDTH /2, HEIGHT);
 	glutInitWindowPosition(900, 20);
 	WindowID2 = glutCreateWindow("Julia Set");
-	gluOrtho2D(0.0, WIDTH, 0.0, HEIGHT);
+	gluOrtho2D(0.0, WIDTH / 2, 0.0, HEIGHT);
 	glutDisplayFunc(displayJulia);
 
 

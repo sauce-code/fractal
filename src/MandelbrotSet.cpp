@@ -4,7 +4,7 @@ MandelbrotSet::MandelbrotSet(unsigned int width, unsigned int height) {
 	this->width = width;
 	this->height = height;
 	this->iterations = 100;
-	this->colorMode = 2;
+	this->colorMode = 1;
 	min.r = -2.0;
 	min.i = -1.2;
 	max.r = 1.0;
