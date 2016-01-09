@@ -150,4 +150,8 @@ void MandelbrotSet::zoom(unsigned int x, unsigned int y) {
 	factor.i = (max.i - min.i) / (height - 1);
 
 	iterations *= 2;
+
+	if (iterations > MAX_ITERATIONS) {
+		iterations = MAX_ITERATIONS;
+	}
 }

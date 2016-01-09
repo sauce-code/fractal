@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include "Complex.h"
 
+#define MAX_ITERATIONS 4096
+
 class MandelbrotSet {
 public:
 	unsigned int width;
