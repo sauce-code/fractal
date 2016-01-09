@@ -4,6 +4,7 @@ MandelbrotSet::MandelbrotSet(unsigned int width, unsigned int height) {
 	this->width = width;
 	this->height = height;
 	this->iterations = 50;
+	this->colorMode = 0;
 	min.r = -2.0;
 	min.i = -1.2;
 	max.r = 1.0;
@@ -29,38 +30,53 @@ void MandelbrotSet::calculate() {
 
 void MandelbrotSet::draw(unsigned int x, unsigned int y, complex c) {
 	complex z = c;
-	bool isInside = true;
+
 	for (unsigned int n = 0; n < iterations; n++) {
 		if (z.getAbsolute() > 4) {
-			isInside = false;
 			break;
 		}
 		z = z.pow2() + c;
 
-//		if (n == iterations - 1) {
-			glBegin(GL_POINTS);
-			glColor3f(0.0, 0.0, getColor(n));
-			glVertex2i(x, y);
-			glEnd();
-//		}
+		glBegin(GL_POINTS);
+		float* yolo = getColor(n);
+		glColor3f(yolo[0], yolo[1], yolo[2]);
+		glVertex2i(x, y);
+		glEnd();
 
 	}
-//	if (isInside) {
-//		glBegin(GL_POINTS);
-//		glColor3f(1.0, 0.0, 0.0);
-//		glVertex2i(x, y);
-//		glEnd();
-//	}
 }
 
-float MandelbrotSet::getColor(unsigned int n) {
+float* MandelbrotSet::getColor(unsigned int n) {
 	// n liegt zwischen 0 und interations - 1
 	// n auf 1 - 100 mappen um dann einen color Value zu bestimmen
 
+	float* array = new float[3];
 	float step = 1.0 / iterations;
-	float redValue = n * step;
+	float redValue = 0.0;
 
-	return redValue;
+	switch (colorMode) {
+	case 0: // all red
+		redValue = 2 * n * step;
+		if (n < iterations / 2 - 1) {
+			array[1] = 0.0;
+			array[2] = 0.0;
+		} else if (n < iterations - 2){
+			array[1] = 1.0;
+			array[2] = 1.0;
+		} else {
+			redValue = 0.0;
+			array[1] = 0.0;
+			array[2] = 0.0;
+		}
+		array[0] = redValue;
+		break;
+	default:
+		array[0] = 1.0;
+		array[1] = 0.0;
+		array[2] = 0.0;
+	}
+
+	return array;
 
 }
 

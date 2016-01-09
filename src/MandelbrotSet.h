@@ -10,11 +10,12 @@ private:
 	unsigned int width;
 	unsigned int height;
 	unsigned int iterations;
+	unsigned int colorMode;
 	complex min;
 	complex max;
 	complex factor;
 	void draw(unsigned int, unsigned int, complex);
-	float getColor(unsigned int);
+	float* getColor(unsigned int);
 public:
 	MandelbrotSet(unsigned int, unsigned int);
 	virtual ~MandelbrotSet();
