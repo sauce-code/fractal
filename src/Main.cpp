@@ -40,11 +40,14 @@ void mouse(int button, int state, int x, int y) {
 		ms->calculate();
 		glutPostRedisplay();
 	} else if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN) {
-		js->k.r = x;
-		js->k.i = y;
+		float xMapped = js->min.r + ((js->max.r - js->min.r) / WIDTH) * x;
+		float yMapped = js->min.i + ((js->max.i - js->min.i) / HEIGHT) * y;
+		js->k.r = xMapped;
+		js->k.i = yMapped;
 		js->calculate();
 		glutSetWindow(WindowID2);
 		glutPostRedisplay();
+		glutSetWindow(WindowID1);
 	}
 }
 
