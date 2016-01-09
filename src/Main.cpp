@@ -8,7 +8,7 @@
 #define HEIGHT 600
 
 MandelbrotSet* ms = new MandelbrotSet(WIDTH, HEIGHT);
-JuliaSet* js = new JuliaSet(WIDTH, HEIGHT);
+JuliaSet* js = new JuliaSet(WIDTH / 2, HEIGHT);
 
 void reshape(int width, int height) {
 	ms->setWidth(width);
@@ -40,6 +40,14 @@ void mouse(int button, int state, int x, int y){
 	}
 }
 
+void mouseJulia(int button, int state, int x, int y) {
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
+			js->zoom(x, y);
+			js->calculate();
+			glutPostRedisplay();
+		}
+}
+
 int main(int argc, char** argv) {
 	GLint WindowID1, WindowID2;
 
@@ -60,8 +68,9 @@ int main(int argc, char** argv) {
 	glutInitWindowSize(WIDTH /2, HEIGHT);
 	glutInitWindowPosition(900, 20);
 	WindowID2 = glutCreateWindow("Julia Set");
-	gluOrtho2D(0.0, WIDTH / 2, 0.0, HEIGHT);
+	gluOrtho2D(0.0, (WIDTH / 2), 0.0, HEIGHT);
 	glutDisplayFunc(displayJulia);
+	glutMouseFunc(mouseJulia);
 
 
 	glutMainLoop();
