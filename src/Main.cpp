@@ -13,8 +13,9 @@ GLint WindowID1, WindowID2;
 
 
 void reshape(int width, int height) {
-	ms->setWidth(width);
-	ms->setHeight(height);
+	glutReshapeWindow(WIDTH, HEIGHT);
+//	ms->setWidth(width);
+//	ms->setHeight(height);
 }
 
 void display() {
@@ -74,7 +75,7 @@ int main(int argc, char** argv) {
 	WindowID1 = glutCreateWindow("Mandelbrot Set");
 	gluOrtho2D(0.0, WIDTH, 0.0, HEIGHT);
 	glClearColor(0.0, 0.0, 0.0, 1.0);
-//	glutReshapeFunc(reshape);
+	glutReshapeFunc(reshape);
 	glutDisplayFunc(display);
 	glutMouseFunc(mouse);
 
