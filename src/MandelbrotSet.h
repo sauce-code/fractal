@@ -2,7 +2,7 @@
 #define MANDELBROTSET_H_
 
 #include <GL/freeglut.h>
-
+#include <stdio.h>
 #include "Complex.h"
 
 class MandelbrotSet {
@@ -23,6 +23,7 @@ public:
 	void setWidth(unsigned int);
 	void setHeight(unsigned int);
 	void setIterations(unsigned int);
+	void zoom(unsigned int, unsigned int);
 };
 
 #endif /* MANDELBROTSET_H_ */

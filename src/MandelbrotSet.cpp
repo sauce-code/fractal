@@ -91,3 +91,36 @@ void MandelbrotSet::setHeight(unsigned int Height) {
 void MandelbrotSet::setIterations(unsigned int iterations) {
 	this->iterations = iterations;
 }
+
+void MandelbrotSet::zoom(unsigned int x, unsigned int y) {
+	printf("x: %i y: %i \n", x, y);
+
+	// map x & y to function
+	float xMapped = min.r + ((max.r - min.r) / width) * x;
+	float yMapped = min.i + ((max.i - min.i) / height) * (height - y);
+
+	printf("xMapped: %f yMapped: %f \n", xMapped, yMapped);
+
+	// halbiere breite und höhe
+	float newWidth = (max.r - min.r) / 2;
+	float newHeight = (max.i - min.i) / 2;
+
+	printf("oldWidth: %f oldHeight %f \n", (max.r - min.r), (max.i - min.i));
+	printf("newWidth: %f newHeight: %f \n", newWidth, newHeight);
+
+	printf("min.r %f max.r %f \n", min.r, max.r);
+	printf("min.i %f max.i %f \n", min.i, max.i);
+
+	// x & y as new middle point
+	min.r = xMapped - (newWidth / 2);
+	max.r = xMapped + (newWidth / 2);
+	min.i = yMapped - (newHeight / 2);
+//	max.i = yMapped + (newHeight / 2);
+	max.i = min.i + (max.r - min.r) * height / width;
+
+	printf("min.r %f max.r %f \n", min.r, max.r);
+	printf("min.i %f max.i %f \n", min.i, max.i);
+
+	factor.r = (max.r - min.r) / (width - 1);
+	factor.i = (max.i - min.i) / (height - 1);
+}

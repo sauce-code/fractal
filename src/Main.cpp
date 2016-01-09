@@ -17,7 +17,18 @@ void display() {
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	ms->calculate();
+
 	glFlush();
+}
+
+void mouse(int button, int state, int x, int y){
+
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
+		ms->zoom(x, y);
+		ms->calculate();
+		glutPostRedisplay();
+	}
+
 }
 
 int main(int argc, char** argv) {
@@ -33,6 +44,7 @@ int main(int argc, char** argv) {
 
 //	glutReshapeFunc(reshape);
 	glutDisplayFunc(display);
+	glutMouseFunc(mouse);
 //	glutKeyboardFunc(keyboard);
 //	glutMouseFunc(mouse);
 
