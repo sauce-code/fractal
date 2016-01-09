@@ -26,6 +26,7 @@ public:
 	void setHeight(unsigned int);
 	void setIterations(unsigned int);
 	void zoom(unsigned int, unsigned int);
+	void setColorMode(int);
 };
 
 #endif /* MANDELBROTSET_H_ */
