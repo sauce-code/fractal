@@ -18,25 +18,33 @@ GLint WindowID1, WindowID2;
 int mouseX, mouseY;
 
 void processMenuEvents(int option) {
+	MandelbrotSet* set;
+
+	if (glutGetWindow() == WindowID1) {
+		set = ms;
+	} else {
+		set = js;
+	}
+
 	float xMapped = 0;
 	float yMapped = 0;
 
 	switch (option) {
 	case ZOOM_IN:
 		printf("Zoom to %i|%i", mouseX, mouseY);
-		ms->zoom(mouseX, mouseY);
-		ms->calculate();
+		set->zoom(mouseX, mouseY);
+		set->calculate();
 		glutPostRedisplay();
 		break;
 	case ZOOM_OUT:
 		printf("Zoom out");
-		ms->zoomOut(mouseX, mouseY);
-		ms->calculate();
+		set->zoomOut(mouseX, mouseY);
+		set->calculate();
 		glutPostRedisplay();
 		break;
 	case RESET:
-		ms->reset();
-		ms->calculate();
+		set->reset();
+		set->calculate();
 		glutPostRedisplay();
 		break;
 	case SHOW_JULIA:
@@ -59,32 +67,38 @@ void processMenuEvents(int option) {
 }
 
 void processColorMenu(int option) {
+	MandelbrotSet* set;
+
+	if (glutGetWindow() == WindowID1) {
+		set = ms;
+	} else {
+		set = js;
+	}
 
 	switch (option) {
 	case 0:
-		ms->colorMode = 0;
+		set->colorMode = 0;
 		break;
 	case 1:
-		ms->colorMode = 1;
+		set->colorMode = 1;
 		break;
 	case 2:
-		ms->colorMode = 2;
+		set->colorMode = 2;
 		break;
 	}
 
-	ms->calculate();
+	set->calculate();
 	glutPostRedisplay();
 
 }
 
-void createMenu() {
-
+void createMenuMandelbrot() {
 	int menu, colorSubmenu;
 
 	colorSubmenu = glutCreateMenu(processColorMenu);
 	glutAddMenuEntry("Red & White", 0);
 	glutAddMenuEntry("RGB", 1);
-	glutAddMenuEntry("flowers", 2);
+	glutAddMenuEntry("Flowers", 2);
 
 	menu = glutCreateMenu(processMenuEvents);
 	//add entries to our menu
@@ -92,6 +106,25 @@ void createMenu() {
 	glutAddMenuEntry("Zoom out", ZOOM_OUT);
 	glutAddMenuEntry("Reset", RESET);
 	glutAddMenuEntry("Show Julia", SHOW_JULIA);
+	glutAddSubMenu("Change Colors", colorSubmenu);
+	glutAddMenuEntry("Save Image", SAVE_IMAGE);
+
+	glutAttachMenu(GLUT_RIGHT_BUTTON);
+}
+
+void createMenuJulia() {
+	int menu, colorSubmenu;
+
+	colorSubmenu = glutCreateMenu(processColorMenu);
+	glutAddMenuEntry("Red & White", 0);
+	glutAddMenuEntry("RGB", 1);
+	glutAddMenuEntry("Flowers", 2);
+
+	menu = glutCreateMenu(processMenuEvents);
+	//add entries to our menu
+	glutAddMenuEntry("Zoom in", ZOOM_IN);
+	glutAddMenuEntry("Zoom out", ZOOM_OUT);
+	glutAddMenuEntry("Reset", RESET);
 	glutAddSubMenu("Change Colors", colorSubmenu);
 	glutAddMenuEntry("Save Image", SAVE_IMAGE);
 
@@ -133,19 +166,6 @@ void mouseMandelbrot(int button, int state, int x, int y) {
 		ms->zoom(x, y);
 		ms->calculate();
 		glutPostRedisplay();
-//	} else if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN) {
-//
-//		float xMapped = js->min.r + ((js->max.r - js->min.r) / WIDTH) * x;
-//		float yMapped = js->min.i + ((js->max.i - js->min.i) / HEIGHT) * y;
-//		js->k.r = xMapped;
-//		js->k.i = yMapped;
-//		js->calculate();
-//		printf("This is the Julia Set for c  %f", xMapped);
-//		printf(" + %f", yMapped);
-//		printf("i");
-//		glutSetWindow(WindowID2);
-//		glutPostRedisplay();
-//		glutSetWindow(WindowID1);
 	}
 }
 
@@ -177,8 +197,7 @@ int main(int argc, char** argv) {
 	glutDisplayFunc(displayMandelbrot);
 	glutMouseFunc(mouseMandelbrot);
 	glutPassiveMotionFunc(mousePassiveMandelbrot);
-
-	createMenu();
+	createMenuMandelbrot();
 
 	// second Window for Julia Sets
 	glutInitWindowSize((WIDTH / 2) - 10, HEIGHT);
@@ -188,6 +207,8 @@ int main(int argc, char** argv) {
 	glutReshapeFunc(reshapeJulia);
 	glutDisplayFunc(displayJulia);
 	glutMouseFunc(mouseJulia);
+	glutPassiveMotionFunc(mousePassiveMandelbrot);
+	createMenuJulia();
 
 	glutMainLoop();
 
