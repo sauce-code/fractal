@@ -31,7 +31,10 @@ void processMenuEvents(int option) {
 	case ZOOM_OUT: // TODO
 		printf("Zoom out");
 		break;
-	case RESET: // TODO
+	case RESET:
+		ms->reset();
+		ms->calculate();
+		glutPostRedisplay();
 		break;
 	case SHOW_JULIA:
 		glutSetWindow(WindowID2);
