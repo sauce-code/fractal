@@ -1,0 +1,140 @@
+%Dokumenttyp + Encoding
+\documentclass[final, paper=a4, paper=portrait, pagesize=auto, fontsize=10pt,english]{scrartcl}
+\usepackage[utf8]{inputenc}
+
+\usepackage[a4paper, total={6.5in, 9in}]{geometry}
+\usepackage{graphicx}
+\usepackage[]{hyperref}
+\usepackage{amsmath}
+
+\usepackage{lmodern} %Schriftarten
+\usepackage[english]{babel}
+\usepackage{color}
+\usepackage{placeins}
+\definecolor{mygreen}{rgb}{0.33,0.63,0.33}
+\definecolor{mygray}{rgb}{0.95,0.95,0.95}
+\definecolor{myblue}{rgb}{0.23,0.23,0.52}
+\renewcommand{\arraystretch}{1.5}
+
+
+\usepackage{listings} %for code
+\lstset{ 
+	 backgroundcolor=\color{mygray},
+	 commentstyle=\color{mygreen},
+	 numbers=left,
+	 keywordstyle=\textbf,
+	 language=C++,
+	 tabsize=3,  
+	 basicstyle=\footnotesize,
+}
+
+
+\begin{document}
+
+\begin{titlepage}
+	\centering
+	\includegraphics[width=0.15\textwidth]{brockLogo}\par\vspace{1cm}
+	{\scshape\LARGE Brock University\par}
+	\vspace{0.5cm}
+	{\Large Department of Computer Science\par}
+	\vspace{1cm}
+	{\Large Report on the final project of COSC 3P98\par}
+	\vspace{1.5cm}
+	{\huge\bfseries Mandelbrot and Julia Sets\par}
+	\vspace{2cm}
+	{\Large\itshape Torben Krüger, Maike Rees\par}
+	\vspace{2cm}	
+	{\large January 2016\par}
+\end{titlepage}
+
+\newpage
+ 
+\section{Introduction}
+During the process of the course, fractals catched our interest so we desided to make an application about fractals for our final project of the course. The Mandelbrot Set is one of the most popular fractals and it is closely related to the Julia Set so we chose it as our main focus. There are a lot of android apps, online applications and pretty pictures about and of Mandelbrot Sets that inspired us further more. 
+
+We developed the Application in c/c++ with openGl, freeglut and freeimage. We created it on Windows 7 in Eclipse Mars and migrated it later into a visual studio(2013) project.
+
+\section{Functionality}
+The Application demonstrates the relation between the Mandelbrot set and Julia sets. Furthermore you get interesting observations through the coloring of the sets. Additionally, images can be saved.
+Here is a screenshot of our program.\\\\
+\includegraphics[width=1.0\textwidth]{screenie1}
+
+
+\section{User Manual}
+The Application comes with two windows. One where the Mandelbrot set is shown and in the other one you can see a Julia set. 
+
+You have multiple options here. With left-click of your mouse you can zoom into the chosen set. The point of your mouse click is going to be the center of the zoomed image.
+
+With a right click a context menu opens. You can chose to zoom in and out, reset the set, change the color or save an image of the set. 
+
+If you open this menu in the Mandelbrot set you additionally have the option to show the Julia set of the chosen Point. It will then show the according Julia Set in the second Window.
+
+\section{Architecture and Implementation}
+The architecture of the application is not too complicated. It is object-oriented and structured into header and cpp - files.
+
+\subsection{Complex Numbers}
+Since we're calculating with complex numbers most of the time in those sets there is a class called Complex.h that describes those complex numbers as a struct. Every complex number comes with a real and imaginary part which are represented by two integers.
+
+This struct also overloads methods for the + and * operator. It also contains a method that squares the number and one that calculates the absolute value of the complex number. Those methods are all needed to calculate the sets.
+
+\begin{lstlisting}
+struct complex {
+	double r, i;
+	double getAbsolute() {...}
+	complex pow2() {...}
+	inline complex operator+(complex a) {...}
+	inline complex operator*(complex a) {...}
+};
+\end{lstlisting} 
+
+\subsection{Mandelbrot Set}
+For a Mandelbrot set we set up a header and the cpp-file that implements the header methods. 
+The Mandelbrot set has public methods to calculate the set, zoom in and out of it, reset it as well as some Getters and Setters. 
+
+\begin{lstlisting}
+class MandelbrotSet {
+public:
+	MandelbrotSet(unsigned int, unsigned int);
+	virtual ~MandelbrotSet();
+	void calculate();
+	void setWidth(unsigned int);
+	void setHeight(unsigned int);
+	void setIterations(unsigned int);
+	void reset();
+	void zoom(unsigned int, unsigned int);
+	void zoomOut(unsigned int, unsigned int);
+	void setColorMode(int);
+};
+\end{lstlisting}
+
+\subsection{Julia Set}
+Looking at the formular of both sets, one can see that they are very close. That is why we decided to let the Julia set be a child of the Mandelbrot set. Since there are only a few changes that we had to make in the Julia classes, we save a lot of code and our implementation gets a lot easier with this design decision. 
+
+The Julia set only overrides the cnstructor and the calculate(), draw() and reset() methods. Additionally it has a complex number k, that is needed for the calculation.
+
+\begin{lstlisting}
+class JuliaSet: public MandelbrotSet {
+public:
+	JuliaSet(unsigned int, unsigned int);
+	void draw(unsigned int, unsigned int, complex);
+	void calculate();
+	void reset();
+	complex k;
+};
+\end{lstlisting}
+
+\subsection{The Main Class} 	
+The Main.cpp puts it all together. It sets up the OpenGl / freeglut environment, handles mouse event and the menus and starts the drawing of the sets. \\\\
+When clicking on an option of the menu the program often needs to know where the mouse is right now to calculate with the right coordinates. For this purpose the application is using the passive motion function that glut offers. It always saves the current mouse coordinates in the global struct.
+
+\section{Mathematic Background}
+\section{Discussion}
+\subsection{The meaning of the color}
+
+
+\subsection{Different coloring methods}
+
+\section{Screenshots}
+\section{References}
+
+\end{document}
