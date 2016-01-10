@@ -132,6 +132,15 @@ float* MandelbrotSet::getColor(unsigned int n) {
 			green = 1.0f;
 		}
 		break;
+	case 4: // greyscale
+		red = 2 * n * step;
+		if (n > iterations - 2) {
+			red = 0.0;
+		}
+		blue = red;
+		green = red;
+
+		break;
 	default:
 		red = 1.0;
 		green = 0.0;
