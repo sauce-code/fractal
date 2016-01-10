@@ -196,6 +196,27 @@ void MandelbrotSet::zoom(unsigned int x, unsigned int y) {
 	}
 }
 
+void MandelbrotSet::zoomOut(unsigned int x, unsigned int y) {
+	// map x & y to function
+	float xMapped = min.r + ((max.r - min.r) / width) * x;
+	float yMapped = min.i + ((max.i - min.i) / height) * y;
+
+	// double height and with
+	float newWidth = (max.r - min.r) * 2;
+	float newHeight = (max.i - min.i) * 2;
+
+	// x & y as new middle point
+	min.r = xMapped - (newWidth / 2);
+	max.r = xMapped + (newWidth / 2);
+	min.i = yMapped - (newHeight / 2);
+	max.i = min.i + (max.r - min.r) * newHeight / newWidth;
+
+	factor.r = (max.r - min.r) / (width - 1);
+	factor.i = (max.i - min.i) / (height - 1);
+
+	iterations /= 2;
+}
+
 void MandelbrotSet::setColorMode(int colorMode) {
 	this->colorMode = colorMode;
 }

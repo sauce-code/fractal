@@ -28,8 +28,11 @@ void processMenuEvents(int option) {
 		ms->calculate();
 		glutPostRedisplay();
 		break;
-	case ZOOM_OUT: // TODO
+	case ZOOM_OUT:
 		printf("Zoom out");
+		ms->zoomOut(mouseX, mouseY);
+		ms->calculate();
+		glutPostRedisplay();
 		break;
 	case RESET:
 		ms->reset();

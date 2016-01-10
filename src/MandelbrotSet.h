@@ -27,6 +27,7 @@ public:
 	void setIterations(unsigned int);
 	void reset();
 	void zoom(unsigned int, unsigned int);
+	void zoomOut(unsigned int, unsigned int);
 	void setColorMode(int);
 };
 
