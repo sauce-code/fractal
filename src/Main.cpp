@@ -117,7 +117,7 @@ void createMenuMandelbrot() {
 	glutAddMenuEntry("Zoom out", ZOOM_OUT);
 	glutAddMenuEntry("Reset", RESET);
 	if (glutGetWindow() == WindowID1){
-		glutAddMenuEntry("Show Julia", SHOW_JULIA);
+		glutAddMenuEntry("Show Julia Set", SHOW_JULIA);
 	}
 	glutAddSubMenu("Change Colors", colorSubmenu);
 	glutAddMenuEntry("Save Image", SAVE_IMAGE);
