@@ -1,0 +1,23 @@
+﻿Build started 10.01.2016 12:11:23.
+     1>Project "C:\maike\HS\auslandssemester\computerGraphics\MandelBrotVS\Template-3P98-2013\Template-3P98-2013\Template-3P98-2013.vcxproj" on node 2 (Build target(s)).
+     1>PreBuildEvent:
+         copy "C:\maike\HS\auslandssemester\computerGraphics\MandelBrotVS\Template-3P98-2013\Template-3P98-2013\GL\freeglut.dll" "C:\maike\HS\auslandssemester\computerGraphics\MandelBrotVS\Template-3P98-2013\Debug\"
+         copy "C:\maike\HS\auslandssemester\computerGraphics\MandelBrotVS\Template-3P98-2013\Template-3P98-2013\FreeImage\freeimaged.dll" "C:\maike\HS\auslandssemester\computerGraphics\MandelBrotVS\Template-3P98-2013\Debug\"
+         :VCEnd
+                 1 Datei(en) kopiert.
+                 1 Datei(en) kopiert.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IGL /IFreeImage /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Source.cpp
+         Source.cpp
+     1>c:\maike\hs\auslandssemester\computergraphics\mandelbrotvs\template-3p98-2013\template-3p98-2013\source.cpp(60): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\maike\hs\auslandssemester\computergraphics\mandelbrotvs\template-3p98-2013\template-3p98-2013\source.cpp(61): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\maike\HS\auslandssemester\computerGraphics\MandelBrotVS\Template-3P98-2013\Debug\Template-3P98-2013.exe" /INCREMENTAL /NOLOGO /LIBPATH:GL /LIBPATH:FreeImage opengl32.lib freeglut.lib FreeImage.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\maike\HS\auslandssemester\computerGraphics\MandelBrotVS\Template-3P98-2013\Debug\Template-3P98-2013.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\maike\HS\auslandssemester\computerGraphics\MandelBrotVS\Template-3P98-2013\Debug\Template-3P98-2013.lib" /MACHINE:X86 Debug\JuliaSet.obj
+         Debug\MandelbrotSet.obj
+         Debug\Source.obj
+         Template-3P98-2013.vcxproj -> C:\maike\HS\auslandssemester\computerGraphics\MandelBrotVS\Template-3P98-2013\Debug\Template-3P98-2013.exe
+     1>Done Building Project "C:\maike\HS\auslandssemester\computerGraphics\MandelBrotVS\Template-3P98-2013\Template-3P98-2013\Template-3P98-2013.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.51
