@@ -1,10 +1,3 @@
-/*
- * JuliaSet.h
- *
- *  Created on: 09.01.2016
- *      Author: Maike
- */
-
 #ifndef JULIASET_H_
 #define JULIASET_H_
 
